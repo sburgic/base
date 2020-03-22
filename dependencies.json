@@ -1,0 +1,14 @@
+[
+    {
+        "name":"STM32Cube_FW_F4_V1.25.0",
+        "location":"gdrive",
+        "link":"12dWRIKlVYjB2FiXb0C-C2hR55wMJeXWn",
+        "tag":"N/A"
+    },
+    {
+        "name":"Add dependency name",
+        "location":"gdrive, git or similar",
+        "link":"GoogleDrive file ID, GitHub link or similar",
+        "tag":"Git tag or similar"
+    }
+]
