@@ -1,2 +1,7 @@
-STM32Cube_FW_F1_V1.4.0
+# Add required dependencies by putting each dependency in new line.
+# Use '#' to comment out the line
+
+# Currently supported dependencies:
+#     STM32Cube_FW_F4_V1.25.0
+
 STM32Cube_FW_F4_V1.25.0
