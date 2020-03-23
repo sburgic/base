@@ -8,6 +8,8 @@
 #    22-Mar-2020 (SSB) [] Initial
 #    22-Mar-2020 (BSE) [] Parse comments in .dep files
 #                         and fix directory handling
+#    23-Mar-2020 (SSB) [] Move processing of the input file to a dedicated
+#                         function
 
 import os
 import sys
@@ -23,6 +25,11 @@ except:
 # Define global variables
 gdrive_def_link = 'https://drive.google.com/uc?id='
 libs_dir_rel    = '../libs/'
+
+file_dir     = os.path.dirname( __file__ )
+libs_dir     = os.path.join( file_dir, libs_dir_rel )
+file_dir_abs = os.path.abspath( file_dir )
+libs_dir_abs = os.path.abspath( libs_dir )
 
 def dump_help():
     print('Usage example: checkout.py /etc/projects/jtag/jtag.dep')
@@ -40,16 +47,7 @@ def validate_args():
             print('Error: Provide .dep file.')
             dump_help()
 
-def main():
-    validate_args()
-
-    file_dir     = os.path.dirname( __file__ )
-    libs_dir     = os.path.join( file_dir, libs_dir_rel )
-    file_dir_abs = os.path.abspath( file_dir )
-    libs_dir_abs = os.path.abspath( libs_dir )
-
-    if ( False == os.path.exists( libs_dir_abs )):
-        os.system( 'mkdir ' + libs_dir_abs )
+def process_in_dependencies( in_data ):
 
     try:
         jfile = open(os.path.join( file_dir_abs,'dependencies.json'), 'r')
@@ -59,17 +57,7 @@ def main():
         print('Error: File dependencies.json not accessible.')
         sys.exit()
 
-    try:
-        ifile = open( sys.argv[1], 'r' )
-        idata = ifile.readlines()
-        idata = [ x.partition("#")[0].strip() for x in idata ]
-        idata = filter(None, idata)
-        ifile.close()
-    except:
-        print('Error: File ' + sys.argv[1] + ' not accessible.')
-        dump_help()
-
-    for lib in idata:
+    for lib in in_data:
         dep = next(( dep for dep in jdata if lib == dep["name"] ), None )
         if ( None != dep ):
             if ( 'gdrive' == dep['location'] ):
@@ -90,6 +78,25 @@ def main():
                     print('Dependency ' + lib + ' already exists.')
         else:
             print('Dependency ' + lib  + ' not supported! Check the .dep file!')
+    return None
+
+def main():
+    validate_args()
+
+    if ( False == os.path.exists( libs_dir_abs )):
+        os.system( 'mkdir ' + libs_dir_abs )
+
+    try:
+        ifile = open( sys.argv[1], 'r' )
+        idata = ifile.readlines()
+        idata = [ x.partition("#")[0].strip() for x in idata ]
+        idata = filter(None, idata)
+        ifile.close()
+    except:
+        print('Error: File ' + sys.argv[1] + ' not accessible.')
+        dump_help()
+
+    process_in_dependencies( idata )
 
 if __name__ == "__main__" :
     main()
