@@ -6,6 +6,8 @@
 ##
 ## Revision
 ##    30-Mar-2020 (SSB) [] Initial
+##    02-Apr-2020 (SSB) [] Remove linker script location. It shall be defined
+##                         in the project central makefile
 
 # Toolchain location
 TOOLCHAIN_ROOT    ?= C:/gcc-arm-none-eabi
@@ -33,9 +35,6 @@ TOOLCHAIN_COMMON_FLAGS := -mcpu=cortex-m4 \
                           -fdata-sections
 # C standard
 TOOLCHAIN_CSTANDARD := -std=gnu99
-
-# Linker script location
-LDSCRIPT := source/STM32F429VI_FLASH.ld
 
 # Linker flags
 LDFLAGS      := -T$(LDSCRIPT) \
