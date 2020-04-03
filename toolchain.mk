@@ -8,6 +8,7 @@
 ##    30-Mar-2020 (SSB) [] Initial
 ##    02-Apr-2020 (SSB) [] Remove linker script location. It shall be defined
 ##                         in the project central makefile
+##    03-Apr-2020 (SSB) [] Update LDFLAGS_DEBUG
 
 # Toolchain location
 TOOLCHAIN_ROOT    ?= C:/gcc-arm-none-eabi
@@ -63,9 +64,9 @@ CFLAGS := -Wall \
 CFLAGS_DEBUG := -ggdb \
                 -g3 \
                 -Og
-LDFLAGS_DEBUG := --specs=rdimon.specs \
-                 -lrdimon \
-                 -Og
+LDFLAGS_DEBUG := -Og
+                 # --specs=rdimon.specs \
+                 # -lrdimon
 CFLAGS_RELEASE  := -Os
 LDFLAGS_RELEASE := --specs=nosys.specs
 
