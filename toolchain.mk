@@ -9,6 +9,7 @@
 ##    02-Apr-2020 (SSB) [] Remove linker script location. It shall be defined
 ##                         in the project central makefile
 ##    03-Apr-2020 (SSB) [] Update LDFLAGS_DEBUG
+##    19-Apr-2020 (SSB) [] Add CPU specific toolchain definitions
 
 # Toolchain location
 TOOLCHAIN_ROOT    ?= C:/gcc-arm-none-eabi
@@ -27,13 +28,18 @@ OBJDMP := $(TOOLCHAIN_BIN_DIR)/$(TARGET_TRIPLET)-objdump
 SIZE   := $(TOOLCHAIN_BIN_DIR)/$(TARGET_TRIPLET)-size
 
 # Common flags for all tools
-TOOLCHAIN_COMMON_FLAGS := -mcpu=cortex-m4 \
-                          -mthumb \
-                          -mfloat-abi=hard \
-                          -mfpu=fpv4-sp-d16 \
+TOOLCHAIN_FLAGS_COMMON := -mthumb \
                           -fmessage-length=0 \
                           -ffunction-sections \
                           -fdata-sections
+
+TOOLCHAIN_FLAGS_M4 := -mcpu=cortex-m4 \
+                      -mfloat-abi=hard \
+                      -mfpu=fpv4-sp-d16 \
+
+TOOLCHAIN_FLAGS_M3 := -mcpu=cortex-m3 \
+                      -mabi=aapcs
+
 # C standard
 TOOLCHAIN_CSTANDARD := -std=gnu99
 
@@ -71,11 +77,13 @@ CFLAGS_RELEASE  := -Os
 LDFLAGS_RELEASE := --specs=nosys.specs
 
 CFLAGS  += $(CFLAGS_$(call toupper,$(BUILD_TYPE))) \
-           $(TOOLCHAIN_COMMON_FLAGS) \
+           $(TOOLCHAIN_FLAGS_COMMON) \
+           $(TOOLCHAIN_FLAGS_$(CPU_FAMILY)) \
            $(TOOLCHAIN_CSTANDARD)
 
 LDFLAGS += $(LDFLAGS_$(call toupper,$(BUILD_TYPE))) \
-           $(TOOLCHAIN_COMMON_FLAGS)
+           $(TOOLCHAIN_FLAGS_COMMON) \
+           $(TOOLCHAIN_FLAGS_$(CPU_FAMILY))
 
 # Build artifacts
 TARGET_ELF   := $(BIN_DIR)/$(PROJECT_NAME).elf
