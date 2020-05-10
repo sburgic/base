@@ -10,6 +10,7 @@
 ##                         in the project central makefile
 ##    03-Apr-2020 (SSB) [] Update LDFLAGS_DEBUG
 ##    19-Apr-2020 (SSB) [] Add CPU specific toolchain definitions
+##    10-May-2020 (SSB) [] Add support for Cortex M7 CPU
 
 # Toolchain location
 TOOLCHAIN_ROOT    ?= C:/gcc-arm-none-eabi
@@ -32,6 +33,10 @@ TOOLCHAIN_FLAGS_COMMON := -mthumb \
                           -fmessage-length=0 \
                           -ffunction-sections \
                           -fdata-sections
+
+TOOLCHAIN_FLAGS_M7 := -mcpu=cortex-m7 \
+                      -mfloat-abi=hard \
+                      -mfpu=fpv5-d16
 
 TOOLCHAIN_FLAGS_M4 := -mcpu=cortex-m4 \
                       -mfloat-abi=hard \
