@@ -6,6 +6,7 @@
 ##
 ## Revision
 ##    28-Mar-2020 (SSB) [] Initial
+##    19-Dec-2020 (SSB) [] Introduce CP tool
 
 ifeq ($(OS),Windows_NT)
     HOST_OS := windows
@@ -19,6 +20,7 @@ endif
 
 MD := mkdir -p
 RM := rm -rf
+CP := cp -u
 
 # Convert lowercase to uppercase
 # We are using custom function to support all platforms
