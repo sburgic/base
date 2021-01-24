@@ -7,6 +7,7 @@
 ## Revision
 ##    28-Mar-2020 (SSB) [] Initial
 ##    19-Dec-2020 (SSB) [] Introduce CP tool
+##    24-Jan-2021 (SSB) [] Fix typo in toupper function
 
 ifeq ($(OS),Windows_NT)
     HOST_OS := windows
@@ -24,4 +25,4 @@ CP := cp -u
 
 # Convert lowercase to uppercase
 # We are using custom function to support all platforms
-toupper = $(subst a,A,$(subst b,B,$(subst c,D,$(subst d,D,$(subst e,E,$(subst f,F,$(subst g,G,$(subst h,H,$(subst i,I,$(subst j,J,$(subst k,K,$(subst l,L,$(subst m,M,$(subst n,N,$(subst o,O,$(subst p,P,$(subst q,Q,$(subst r,R,$(subst s,S,$(subst t,T,$(subst u,U,$(subst v,V,$(subst w,W,$(subst x,X,$(subst y,Y,$(subst z,Z,$1))))))))))))))))))))))))))
+toupper = $(subst a,A,$(subst b,B,$(subst c,C,$(subst d,D,$(subst e,E,$(subst f,F,$(subst g,G,$(subst h,H,$(subst i,I,$(subst j,J,$(subst k,K,$(subst l,L,$(subst m,M,$(subst n,N,$(subst o,O,$(subst p,P,$(subst q,Q,$(subst r,R,$(subst s,S,$(subst t,T,$(subst u,U,$(subst v,V,$(subst w,W,$(subst x,X,$(subst y,Y,$(subst z,Z,$1))))))))))))))))))))))))))
