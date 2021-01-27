@@ -6,6 +6,7 @@
 ##
 ## Revision
 ##    29-Dec-2020 (SSB) [] Initial
+##    25-Jan-2021 (SSB) [] Add support for Cortex M7 CPUs
 
 # Toolchain location
 TOOLCHAIN_ROOT ?= C:/iar_8.50.6/arm
@@ -17,7 +18,8 @@ AR     := $(TOOLCHAIN_ROOT)/bin/iarchive.exe
 AS     := $(TOOLCHAIN_ROOT)/bin/iasmarm.exe
 OBJCPY := $(TOOLCHAIN_ROOT)/bin/ielftool.exe
 
-CFLAGS_M3 := --cpu=Cortex-M3 \
+CFLAGS_M3 := --cpu=Cortex-M3
+CFLAGS_M7 := --cpu=Cortex-M7
 
 # Archiver flags
 ARFLAGS := --create
@@ -36,7 +38,8 @@ CFLAGS := --endian=little \
           --error_limit=1 \
           --use_unix_directory_separators \
           --use_c++_inline \
-          --require_prototypes
+          --require_prototypes \
+          --silent
 
 # Build type modifiers
 CFLAGS_DEBUG    := --debug \
@@ -46,7 +49,7 @@ CFLAGS_RELEASE  := -Ohs
 LDFLAGS_RELEASE :=
 
 CFLAGS  += $(CFLAGS_$(call toupper,$(BUILD_TYPE))) \
-           $(CFLAGS_FLAGS_$(CPU_FAMILY))
+           $(CFLAGS_$(CPU_FAMILY))
 
 LDFLAGS += $(LDFLAGS_$(call toupper,$(BUILD_TYPE))) \
            --config $(LDSCRIPT).icf \
