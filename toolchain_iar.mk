@@ -7,6 +7,7 @@
 ## Revision
 ##    29-Dec-2020 (SSB) [] Initial
 ##    25-Jan-2021 (SSB) [] Add support for Cortex M7 CPUs
+##    30-Jan-2021 (SSB) [] Add support for Cortex M4 CPUs
 
 # Toolchain location
 TOOLCHAIN_ROOT ?= C:/iar_8.50.6/arm
@@ -19,6 +20,7 @@ AS     := $(TOOLCHAIN_ROOT)/bin/iasmarm.exe
 OBJCPY := $(TOOLCHAIN_ROOT)/bin/ielftool.exe
 
 CFLAGS_M3 := --cpu=Cortex-M3
+CFLAGS_M4 := --cpu=Cortex-M4
 CFLAGS_M7 := --cpu=Cortex-M7
 
 # Archiver flags
