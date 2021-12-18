@@ -8,6 +8,8 @@
 ##    28-Mar-2020 (SSB) [] Initial
 ##    19-Dec-2020 (SSB) [] Introduce CP tool
 ##    24-Jan-2021 (SSB) [] Fix typo in toupper function
+##    19-Nov-2021 (SSB) [] Add OS check
+##
 
 ifeq ($(OS),Windows_NT)
     HOST_OS := windows
@@ -17,6 +19,10 @@ else
     ifeq ($(uname_s),Linux)
         HOST_OS := linux
     endif
+endif
+
+ifeq ($(HOST_OS),)
+    $(error Unsupported host OS!)
 endif
 
 MD := mkdir -p
