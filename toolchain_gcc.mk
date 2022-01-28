@@ -14,6 +14,7 @@
 ##    24-Jan-2021 (SSB) [] File rename
 ##                         Refactoring, no functional impact
 ##    19-Nov-2021 (SSB) [] Add support for Cortex M0+ CPU
+##    26-Jan-2022 (SSB) [] Update Cortex M0+ CFLAGS
 ##
 
 # Check if CPU family is defined
@@ -54,7 +55,9 @@ TOOLCHAIN_FLAGS_M4 := -mcpu=cortex-m4 \
 TOOLCHAIN_FLAGS_M3 := -mcpu=cortex-m3 \
                       -mabi=aapcs
 
-TOOLCHAIN_FLAGS_M0+ := -mcpu=cortex-m0plus
+TOOLCHAIN_FLAGS_M0+ := -mcpu=cortex-m0plus \
+                       -mabi=aapcs \
+                       -masm-syntax-unified
 
 # C standard
 TOOLCHAIN_CSTANDARD := -std=gnu99
